@@ -6,6 +6,8 @@
     "photo-sphere-viewer-sa": "^3.2.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
     "three": "^0.88.0",
     "uevent": "^1.0.0"
