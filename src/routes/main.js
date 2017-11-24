@@ -5,6 +5,7 @@ import {
     Link
 } from 'react-router-dom';
 import Header from '../components/header';
+import ReduxDemo from '../demo/redux';
 
 const MainRouter = () => (
     <Router>
@@ -13,6 +14,7 @@ const MainRouter = () => (
             <hr />
             {/*测试路由*/}
             <Route exact path="/" component={Home} />
+            <Route path="/reduxDemo" component={ReduxDemo} />
             <Route path="/about" component={About} />
             <Route path="/topics" component={Topics} />
         </div>
