@@ -4,7 +4,7 @@ import {
     Route,
     Link
 } from 'react-router-dom';
-
+import App from '../App';
 
 const BasicExample = () => (
     <Router>
@@ -14,7 +14,7 @@ const BasicExample = () => (
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/topics">Topics</Link></li>
             </ul>
-
+            <App></App>
             <hr />
 
             <Route exact path="/" component={Home} />
