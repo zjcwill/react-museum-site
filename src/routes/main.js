@@ -4,19 +4,14 @@ import {
     Route,
     Link
 } from 'react-router-dom';
-import App from '../App';
+import Header from '../components/header';
 
-const BasicExample = () => (
+const MainRouter = () => (
     <Router>
         <div>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/topics">Topics</Link></li>
-            </ul>
-            <App></App>
+            <Header/>
             <hr />
-
+            {/*测试路由*/}
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
             <Route path="/topics" component={Topics} />
@@ -70,4 +65,4 @@ const Home = () => (
     </div>
   )
 
-export default BasicExample;
+export default MainRouter;
