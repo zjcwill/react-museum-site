@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-const Header = ()=>{
+import { Link } from 'mirrorx';
+
+const Header = () => {
     return (
         <div>
             <h2>Header</h2>

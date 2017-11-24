@@ -1,9 +1,11 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
-import Router from './routes/main';
-import { render } from 'mirrorx'
+import App from './routes';
+import { render, Router } from 'mirrorx';
 
-render(<Router />, document.getElementById('root'));
+render(
+    <Router hashType="hashbang">
+        <App />
+    </Router>, document.getElementById('root'));
 registerServiceWorker();
