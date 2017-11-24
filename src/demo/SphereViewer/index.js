@@ -7,7 +7,7 @@ const options = {
   loading_text: 'loading',
   container: 'photosphere',
   navbar: 'autorotate zoom fullscreen',
-  size:{
+  size: {
     // width: 500,
     height: 800
   }
@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>博物馆demo</h1>
-                <ReactSphereViewer src={src} options={options}></ReactSphereViewer>
+        <ReactSphereViewer src={src} options={options}></ReactSphereViewer>
       </div>
     );
   }
