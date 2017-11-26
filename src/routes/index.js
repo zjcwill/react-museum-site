@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'mirrorx';
 import Header from '../components/header';
+import Footer from '../components/footer';
 import ReduxDemo from '../demo/redux';
 import { Layout } from 'antd';
 import IndexPage from './IndexPage';
@@ -11,6 +12,7 @@ const MainRouter = () => (
     <Header />
     {/*测试路由*/}
     <Content>
+      {/*首页轮播图不需要留白*/}
       <Route exact path="/" component={IndexPage} />
       <div style={{padding:"0 60px"}}>
         <Route path="/reduxDemo" component={ReduxDemo} />
@@ -18,6 +20,7 @@ const MainRouter = () => (
         <Route path="/topics" component={Topics} />
       </div>
     </Content>
+    <Footer/>
   </Layout>
 )
 
