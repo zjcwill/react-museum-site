@@ -7,19 +7,21 @@ import React from 'react';
 import { Route } from 'mirrorx';
 import Header from '../components/header';
 import ReduxDemo from '../demo/redux';
+import { Layout, Button } from 'antd';
+
+const { Content } = Layout;
 
 const MainRouter = () => (
-  <div>
+  <Layout>
     <Header />
-    <hr />
     {/*测试路由*/}
-    <div>
+    <Content style={{padding:"0 60px"}}>
       <Route exact path="/" component={Home} />
       <Route path="/reduxDemo" component={ReduxDemo} />
       <Route path="/about" component={About} />
       <Route path="/topics" component={Topics} />
-    </div>
-  </div>
+    </Content>
+  </Layout>
 )
 
 const Home = () => (

@@ -1,17 +1,32 @@
 import React from 'react';
 import { Link } from 'mirrorx';
+import { Layout, Menu } from 'antd';
+import './index.css';
 
-const Header = () => {
+const { Header } = Layout;
+
+const HeaderComponent = () => {
     return (
-        <div>
-            <h2>Header</h2>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/topics">Topics</Link></li>
-            </ul>
-        </div>
+        <Header>
+            <div className="logo" />
+            <Menu
+                theme="dark"
+                mode="horizontal"
+                defaultSelectedKeys={['2']}
+                style={{ lineHeight: '64px' }}
+            >
+                <Menu.Item key="1">
+                    <Link to="/">主页</Link>
+                </Menu.Item>
+                <Menu.Item key="2">
+                    <Link to="/about">资讯</Link>
+                </Menu.Item>
+                <Menu.Item key="3">
+                    <Link to="/topics">全景漫游</Link>
+                </Menu.Item>
+            </Menu>
+        </Header>
     )
 }
 
-export default Header;
+export default HeaderComponent;
