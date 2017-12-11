@@ -1,5 +1,7 @@
-@import url(~antd/dist/antd.css);
+@import '~antd/dist/antd.css';
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif; }
+  font-family: sans-serif;
+  background-color: red;
+}
