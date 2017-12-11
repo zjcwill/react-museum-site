@@ -10,6 +10,7 @@
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-scripts": "1.0.17",
+    "react-slick": "^0.16.0",
     "three": "^0.88.0",
     "uevent": "^1.0.0"
   },

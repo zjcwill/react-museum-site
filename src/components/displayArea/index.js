@@ -30,11 +30,8 @@ const DisplayArea = () => (
         <DisplayCard />
         <DisplayCard />
         <DisplayCard />
-
         <DisplayCard />
-
         <DisplayCard />
-
     </Row>
 );
 
