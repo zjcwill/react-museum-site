@@ -5,6 +5,7 @@ import Footer from '../components/footer';
 import ReduxDemo from '../demo/redux';
 import { Layout } from 'antd';
 import IndexPage from './IndexPage';
+import NewsPage from './newsPage';
 const { Content } = Layout;
 
 const MainRouter = () => (
@@ -13,10 +14,10 @@ const MainRouter = () => (
     {/*测试路由*/}
     <Content>
       {/*首页轮播图不需要留白*/}
-      <Route exact path="/" component={IndexPage} />
+      <Route exact path="/" component={IndexPage}/>
       <div style={{padding:"0 60px"}}>
         <Route path="/reduxDemo" component={ReduxDemo} />
-        <Route path="/about" component={About} />
+        <Route path="/news" component={NewsPage} />
         <Route path="/topics" component={Topics} />
       </div>
     </Content>

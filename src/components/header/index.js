@@ -15,11 +15,11 @@ const HeaderComponent = () => {
                 defaultSelectedKeys={['2']}
                 style={{ lineHeight: '64px' }}
             >
-                <Menu.Item key="1">
+                <Menu.Item key="index">
                     <Link to="/">主页</Link>
                 </Menu.Item>
-                <Menu.Item key="2">
-                    <Link to="/about">资讯</Link>
+                <Menu.Item key="news">
+                    <Link to="/news">资讯</Link>
                 </Menu.Item>
                 <Menu.Item key="3">
                     <Link to="/topics">全景漫游</Link>

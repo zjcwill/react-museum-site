@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.0.1",
+    "axios": "^0.17.1",
     "mirrorx": "^0.2.10",
     "photo-sphere-viewer-sa": "^3.2.0",
     "prop-types": "^15.6.0",
