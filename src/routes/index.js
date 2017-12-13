@@ -17,7 +17,7 @@ const MainRouter = () => (
       <Route exact path="/" component={IndexPage}/>
       <div style={{padding:"0 60px"}}>
         <Route path="/reduxDemo" component={ReduxDemo} />
-        <Route path="/news" component={NewsPage} />
+        <Route path="/news" component={NewsPage} onEnter={()=>{console.log('进入新闻页面')}}/>
         <Route path="/topics" component={Topics} />
       </div>
     </Content>
