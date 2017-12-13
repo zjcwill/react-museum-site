@@ -15,9 +15,9 @@ const MainRouter = () => (
     <Content>
       {/*首页轮播图不需要留白*/}
       <Route exact path="/" component={IndexPage}/>
-      <div style={{padding:"0 60px"}}>
+      <div style={{padding:"0 50px"}}>
         <Route path="/reduxDemo" component={ReduxDemo} />
-        <Route path="/news" component={NewsPage} onEnter={()=>{console.log('进入新闻页面')}}/>
+        <Route path="/news" component={NewsPage} />
         <Route path="/topics" component={Topics} />
       </div>
     </Content>
