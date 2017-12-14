@@ -108,7 +108,7 @@ class NewsPage extends React.Component {
     return (
       <div style={{minWidth:"1200px"}}>
         <MuseumNews />
-        <Row>
+        <Row style={{paddingTop:'20px'}}>
           <Col span={8}>
             <MuseumQuickInfo/>
           </Col>
