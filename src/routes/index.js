@@ -6,6 +6,7 @@ import ReduxDemo from '../demo/redux';
 import { Layout } from 'antd';
 import IndexPage from './IndexPage';
 import NewsPage from './newsPage';
+import ViewerIndexPage from './viewIndexPage';
 const { Content } = Layout;
 
 const MainRouter = () => (
@@ -18,7 +19,7 @@ const MainRouter = () => (
       <div style={{padding:"0 50px"}}>
         <Route path="/reduxDemo" component={ReduxDemo} />
         <Route path="/news" component={NewsPage} />
-        <Route path="/topics" component={Topics} />
+        <Route path="/viewerIndex" component={ViewerIndexPage} />
       </div>
     </Content>
     <Footer/>
