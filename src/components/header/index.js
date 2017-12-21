@@ -22,7 +22,7 @@ const HeaderComponent = () => {
                     <Link to="/news">资讯</Link>
                 </Menu.Item>
                 <Menu.Item key="3">
-                    <Link to="/topics">全景漫游</Link>
+                    <Link to="/viewerIndex">全景漫游</Link>
                 </Menu.Item>
             </Menu>
         </Header>

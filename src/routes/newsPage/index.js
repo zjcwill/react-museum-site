@@ -1,8 +1,10 @@
 import React from 'react';
 import mirror, { actions, connect } from 'mirrorx';
 import axios from 'axios';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Tabs,Button } from 'antd';
 import './index.css';
+
+const {TabPane} = Tabs;
 
 mirror.model({
   name: 'news',
@@ -23,6 +25,9 @@ mirror.model({
     }
   },
 })
+
+//占位图统一格式
+const placeholdImg = { width: '100%', height: '200px' };
 
 // connect state with component
 const App = connect()(props => (
@@ -48,16 +53,16 @@ const MuseumNews = (props) => {
 //公告栏&重要活动（占位图）
 const BoradInformation = (props) => {
   return (
-    <Row style={{paddingTop:'20px'}}>
+    <Row style={{ paddingTop: '20px' }}>
       <Col span={8} >
-        <Card title="公告栏" style={{ width: '100%',maxHeight:'200px' }} loading={false} className="news-card-item">
+        <Card title="公告栏" style={{ width: '100%', maxHeight: '200px' }} loading={false} className="news-card-item">
           <p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p>
-          <p>Card content</p>
-          <p>Card content</p>
+          <p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p>
+          <p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p>
         </Card>
       </Col>
-      <Col span={16} style={{paddingLeft:'30px'}}>
-        <img src="http://via.placeholder.com/800x200" />
+      <Col span={16} style={{ paddingLeft: '20px' }}>
+        <img style={placeholdImg} src="http://via.placeholder.com/800x200" />
       </Col>
     </Row>
   )
@@ -65,18 +70,32 @@ const BoradInformation = (props) => {
 // 博物馆快讯
 const MuseumQuickInfo = (props) => {
   return (
-    <div>
-      博物馆快讯
-    </div>
+    <Card title="博物馆快讯" style={{ width: '100%', height: '400px' }} loading={false} className="news-card-item">
+      <p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p>
+      <p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p>
+      <p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p>
+    </Card>
   )
 }
 
 //互联网新闻系统
 const InternentNews = (props) => {
   return (
+    <Card title="互联网新闻" style={{ width: '90%', height: '400px', marginLeft: '20px' }} loading={false} className="news-card-item">
+      <Tabs defaultActiveKey="1" onChange={(e)=>{console.log(e)}}>
+        <TabPane tab="新闻" key="1">Content of Tab Pane 1</TabPane>
+        <TabPane tab="娱乐" key="2">Content of Tab Pane 2</TabPane>
+        <TabPane tab="科技" key="3">Content of Tab Pane 3</TabPane>
+      </Tabs>
+    </Card>
+  )
+}
+
+//占位图
+const PlaceHoldImg = () => {
+  return (
     <div>
-      互联网新闻
-      {props.hello}
+      <img style={{ width: '100%', height: '190px', paddingBottom: '10px' }} src="http://via.placeholder.com/220x200" />
     </div>
   )
 }
@@ -84,11 +103,23 @@ const InternentNews = (props) => {
 //友链接模块
 const FriendLink = () => {
   return (
-    <div>
-      友链
-    </div>
+    <Card style={{ width: '100%', height: '200px',background: 'rgb(190, 200, 200)' }}>
+       <FriendLinkItem name="友链网" href="https://www.baidu.com"/>
+       <FriendLinkItem name="友链网" href="https://www.baidu.com"/>
+       <FriendLinkItem name="友链网" href="https://www.baidu.com"/>
+       <FriendLinkItem name="友链网" href="https://www.baidu.com"/>
+       <FriendLinkItem name="友链网" href="https://www.baidu.com"/>
+       <FriendLinkItem name="友链网" href="https://www.baidu.com"/>
+       <FriendLinkItem name="友链网" href="https://www.baidu.com"/>
+       <FriendLinkItem name="友链网" href="https://www.baidu.com"/>
+    </Card>
   )
-}
+};
+
+//友链项
+const FriendLinkItem = (props)=>(
+  <Button ghost style={{marginRight:'10px',marginBottom:'10px',width:'95px',height:'55px'}}><a href={props.href}>{props.name}</a></Button>
+);
 
 class NewsPage extends React.Component {
   constructor(props) {
@@ -106,18 +137,18 @@ class NewsPage extends React.Component {
 
   render() {
     return (
-      <div style={{minWidth:"1200px"}}>
+      <div style={{ minWidth: "1200px" }}>
         <MuseumNews />
-        <Row style={{paddingTop:'20px'}}>
+        <Row style={{ paddingTop: '20px' }}>
           <Col span={8}>
-            <MuseumQuickInfo/>
+            <MuseumQuickInfo />
           </Col>
           <Col span={8}>
-            <InternentNews/>
+            <InternentNews />
           </Col>
           <Col span={8}>
-            占位图
-            <FriendLink/>
+            <PlaceHoldImg />
+            <FriendLink />
           </Col>
         </Row>
       </div>
