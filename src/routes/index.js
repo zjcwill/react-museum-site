@@ -6,6 +6,7 @@ import ReduxDemo from '../demo/redux';
 import { Layout } from 'antd';
 import IndexPage from './IndexPage';
 import NewsPage from './newsPage';
+import ViewerIndexPage from './viewIndexPage';
 import ViewerDetailPage from './viewerDetailPage';
 const { Content } = Layout;
 
