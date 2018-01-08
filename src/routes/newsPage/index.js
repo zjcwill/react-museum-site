@@ -1,5 +1,5 @@
 import React from 'react';
-import mirror, { actions, connect } from 'mirrorx';
+import mirror, { actions, connect,Link } from 'mirrorx';
 import axios from 'axios';
 import { Row, Col, Card, Tabs,Button } from 'antd';
 import './index.css';
@@ -56,9 +56,9 @@ const BoradInformation = (props) => {
     <Row style={{ paddingTop: '20px' }}>
       <Col span={8} >
         <Card title="公告栏" style={{ width: '100%', maxHeight: '200px' }} loading={false} className="news-card-item">
-          <p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p>
-          <p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p>
-          <p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p>
+          <Link to="/newsPage/tech/1"><p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p></Link>
+          <Link to="/newsPage/tech/1"><p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p></Link>
+          <Link to="/newsPage/tech/1"><p>我馆周一闭馆。观众参观可提前短信预约、网上预约或现场领票，团体参观需提前电话预约，详见参观门票。</p></Link>
         </Card>
       </Col>
       <Col span={16} style={{ paddingLeft: '20px' }}>
