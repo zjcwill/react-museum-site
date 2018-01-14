@@ -7,7 +7,7 @@ const ViewImgPreview = props => {
   const defaultImg = props.imgUrl || "http://via.placeholder.com/1200x400";
   return (
     <Link to={props.url}>
-      <img style={{ width: "100%", height: "400px" }} src={defaultImg} />
+      <img style={{ width: "100%", height: "400px" }} alt="" src={defaultImg} />
     </Link>
   );
 };

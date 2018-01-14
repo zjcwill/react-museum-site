@@ -9,6 +9,8 @@ import NewsPage from './newsPage';
 import NewsDetailPage from './newsDetailPage';
 import ViewerIndexPage from './viewIndexPage';
 import ViewerDetailPage from './viewerDetailPage';
+import AdminPage from './adminPage';
+import SigninPage from './signinPage';
 
 const { Content } = Layout;
 
@@ -25,6 +27,8 @@ const MainRouter = () => (
         <Route path="/newsPage/:type/:id" component={NewsDetailPage} />
         <Route path="/viewerIndex" component={ViewerIndexPage} />
         <Route path="/viewer/:id" component={ViewerDetailPage} />
+        <Route path="/admin" component={AdminPage} />
+        <Route path="/signin" component={SigninPage}/>
       </div>
     </Content>
     <Footer/>

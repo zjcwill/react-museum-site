@@ -1,5 +1,5 @@
 import React from 'react';
-import { actions, connect } from 'mirrorx';
+import { connect } from 'mirrorx';
 import Banner from '../../components/banner';
 import InformationBoard from '../../components/informationBoard';
 import DisplayArea from '../../components/displayArea';

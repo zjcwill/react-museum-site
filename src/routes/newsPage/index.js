@@ -1,6 +1,6 @@
 import React from 'react';
 import mirror, { actions, connect,Link } from 'mirrorx';
-import axios from 'axios';
+// import axios from 'axios';
 import { Row, Col, Card, Tabs,Button } from 'antd';
 import './index.css';
 
