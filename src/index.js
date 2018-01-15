@@ -2,7 +2,12 @@ import React from 'react';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import App from './routes';
-import { render, Router } from 'mirrorx';
+import mirror,{ render, Router } from 'mirrorx';
+
+//开启url哈希，防止缓存
+mirror.defaults({
+    historyMode:'hash'
+});
 
 render(
     <Router hashType="hashbang">

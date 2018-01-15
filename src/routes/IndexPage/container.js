@@ -12,7 +12,9 @@ const container = mirror.model({
         ]
     },
     reducers: {},
-    effects: {},
+    effects: {
+        
+    },
 });
 
 export default container;
