@@ -3,7 +3,7 @@ import { Row, Col, Tabs, Card, List, Upload, Button, Icon, Spin } from "antd";
 import { appId, appKey, xLCId, xLCKey } from "../../utils/globalKey";
 import AV from "leancloud-storage";
 import axios from "axios";
-import _ from 'lodash';
+import _ from "lodash";
 
 const { TabPane } = Tabs;
 
@@ -57,7 +57,7 @@ const MainPageSetting = props => {
         dataSource={bannerData2}
         renderItem={item => (
           <List.Item>
-              {console.log("88888",item.fileName)}
+            {console.log("88888", item.fileName)}
             <List.Item.Meta
               title={<UploadImg fileName={item.fileName} type={item.type} />}
             />
@@ -114,12 +114,12 @@ const AdminPage = props => {
 class UploadImg extends React.Component {
   state = {
     fileList: [
-    //   {
-    //     uid: -1,
-    //     name: "xxx.png",
-    //     status: "done",
-    //     url: "http://www.baidu.com/xxx.png"
-    //   }
+      //   {
+      //     uid: -1,
+      //     name: "xxx.png",
+      //     status: "done",
+      //     url: "http://www.baidu.com/xxx.png"
+      //   }
     ],
     isLoading: true
   };
@@ -153,6 +153,8 @@ class UploadImg extends React.Component {
               __type: "File"
             }
           })
+        }).then(() => {
+          this.getData();
         });
         return file.response.status === "success";
       }
@@ -162,33 +164,39 @@ class UploadImg extends React.Component {
     this.setState({ fileList });
   };
 
-  componentDidMount() {
+  //获取图片在同一表中名字相同，时间最新的一个
+  getData() {
     try {
       const data = axios({
         url: `https://hd7nxqxs.api.lncld.net/1.1/classes/${this.props.type}`,
         method: "GET",
         headers: { ...headers, "Content-Type": "application/json" }
       }).then(response => {
-        let data = response.data.results.filter((item)=>item.name===this.props.fileName);
-        data = _.maxBy(data,(item)=>item.createdAt);
+        let data = response.data.results.filter(
+          item => item.name === this.props.fileName
+        );
+        data = _.maxBy(data, item => item.createdAt);
         this.setState({
           isLoading: false,
-          fileList: [
-            {
-              uid: -1,
-              name: data.name,
-              status: "done",
-              url: data.url,
-            }
-          ],
+          fileList: _.isNil(data)
+            ? []
+            : [
+                {
+                  uid: -1,
+                  name: data.name,
+                  status: "done",
+                  url: data.picture.url
+                }
+              ]
         });
       });
     } catch (error) {
       console.log(error);
     }
   };
-  handleOnPreview(file){
-    console.log(file.url)
+
+  componentDidMount() {
+    this.getData();
   }
 
   render() {
@@ -197,7 +205,7 @@ class UploadImg extends React.Component {
       headers: headers,
       onChange: this.handleChange,
       action: `https://hd7nxqxs.api.lncld.net/1.1/files/${this.props.fileName}`,
-      multiple: false,
+      multiple: false
     };
 
     return (
