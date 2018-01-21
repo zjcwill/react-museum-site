@@ -5,7 +5,7 @@ const headers = {
   "X-LC-Id": xLCId,
   "X-LC-Key": xLCKey
 };
-
+//获取banner图片
 export function loadBanner(options = { "Content-Type": "application/json" }) {
   return axios({
     method: "GET",

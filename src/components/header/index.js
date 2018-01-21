@@ -11,7 +11,7 @@ const HeaderComponent = ({ location }) => {
         <Header>
             <div className="logo" />
             <Menu
-                theme="dark"
+                theme="light"
                 mode="horizontal"
                 selectedKeys={[location.pathname]}
                 defaultSelectedKeys={["/"]}

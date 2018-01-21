@@ -1,4 +1,4 @@
-import mirror, { actions, connect } from 'mirrorx';
+import mirror, { actions } from 'mirrorx';
 import { loadBanner } from '../../services/indexPage';
 import _ from "lodash";
 

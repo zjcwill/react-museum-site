@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Tabs, Card, List, Upload, Button, Icon, Spin } from "antd";
+import { Row, Tabs, Card, List, Upload, Button, Icon, Spin } from "antd";
 import { appId, appKey, xLCId, xLCKey } from "../../utils/globalKey";
 import AV from "leancloud-storage";
 import axios from "axios";
@@ -168,7 +168,7 @@ class UploadImg extends React.Component {
   //获取图片在同一表中名字相同，时间最新的一个
   getData() {
     try {
-      const data = axios({
+      let data = axios({
         url: `https://hd7nxqxs.api.lncld.net/1.1/classes/${this.props.type}`,
         method: "GET",
         headers: { ...headers, "Content-Type": "application/json" }
