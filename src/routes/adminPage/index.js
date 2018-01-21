@@ -7,11 +7,12 @@ import _ from "lodash";
 
 const { TabPane } = Tabs;
 
+//上传图片头部
 const headers = {
   "X-LC-Id": xLCId,
   "X-LC-Key": xLCKey
 };
-
+//初始化learncloud
 AV.init({ appId, appKey });
 
 //主页设置
@@ -175,7 +176,7 @@ class UploadImg extends React.Component {
         let data = response.data.results.filter(
           item => item.name === this.props.fileName
         );
-        data = _.maxBy(data, item => item.createdAt);
+        data = _.maxBy(data, item => item.createdAt);//按创建时间取最新上传的一条
         this.setState({
           isLoading: false,
           fileList: _.isNil(data)
@@ -191,7 +192,7 @@ class UploadImg extends React.Component {
         });
       });
     } catch (error) {
-      console.log(error);
+      console.log("获取上传图片",error);
     }
   };
 

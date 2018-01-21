@@ -16,10 +16,8 @@ const { Content } = Layout;
 
 const MainRouter = () => (
   <Layout>
-    <Header />
-    {/*测试路由*/}
+    <Route path="*" component={Header}/>
     <Content>
-      {/*首页轮播图不需要留白*/}
       <Route exact path="/" component={IndexPage}/>
       <div style={{padding:"0 50px"}}>
         <Route path="/reduxDemo" component={ReduxDemo} />
@@ -31,7 +29,7 @@ const MainRouter = () => (
         <Route path="/signin" component={SigninPage}/>
       </div>
     </Content>
-    <Footer/>
+    <Route path="*" component={Footer}/>
   </Layout>
 )
 

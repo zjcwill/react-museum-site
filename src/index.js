@@ -10,7 +10,7 @@ mirror.defaults({
 });
 
 render(
-    <Router hashType="hashbang">
+    <Router>
         <App />
     </Router>, document.getElementById('root'));
 registerServiceWorker();
