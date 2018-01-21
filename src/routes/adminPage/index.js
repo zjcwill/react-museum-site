@@ -1,11 +1,23 @@
 import React from "react";
-import { Row, Tabs, Card, List, Upload, Button, Icon, Spin } from "antd";
+import {
+  Row,
+  Col,
+  Tabs,
+  Card,
+  List,
+  Upload,
+  Button,
+  Icon,
+  Spin,
+  Input
+} from "antd";
 import { appId, appKey, xLCId, xLCKey } from "../../utils/globalKey";
 import AV from "leancloud-storage";
 import axios from "axios";
 import _ from "lodash";
 
 const { TabPane } = Tabs;
+const Search = Input.Search;
 
 //上传图片头部
 const headers = {
@@ -14,7 +26,23 @@ const headers = {
 };
 //初始化learncloud
 AV.init({ appId, appKey });
-
+//管理员账号设置
+const AdminAccountSetting = props => {
+  return (
+    <Card title="管理员账号设置">
+      <Row>
+        <Col span={6}>
+          <Input value="Admin" disabled="true" />
+        </Col>
+      </Row>
+      <Row style={{marginTop:"10px"}}>
+        <Col span={6}>
+          <Search placeholder="输入新密码" type="password" enterButton="设置" />
+        </Col>
+      </Row>
+    </Card>
+  );
+};
 //主页设置
 const MainPageSetting = props => {
   const bannerData = [
@@ -50,7 +78,8 @@ const MainPageSetting = props => {
       fileName: "banner4"
     }
   ];
-
+  //主页
+  //轮播图设置
   const bannerSetting = (
     <Card title="轮播图">
       <List
@@ -66,7 +95,7 @@ const MainPageSetting = props => {
       />
     </Card>
   );
-
+  //活动设置
   const activitySetting = (
     <Card title="活动">
       <List
@@ -106,7 +135,7 @@ const AdminPage = props => {
           全景图
         </TabPane>
         <TabPane tab="管理员账号设置" key="4">
-          管理员账号设置
+          {AdminAccountSetting()}
         </TabPane>
       </Tabs>
     </div>
@@ -178,7 +207,7 @@ class UploadImg extends React.Component {
         let data = response.data.results.filter(
           item => item.name === this.props.fileName
         );
-        data = _.maxBy(data, item => item.createdAt);//按创建时间取最新上传的一条
+        data = _.maxBy(data, item => item.createdAt); //按创建时间取最新上传的一条
         this.setState({
           isLoading: false,
           fileList: _.isNil(data)
@@ -194,9 +223,9 @@ class UploadImg extends React.Component {
         });
       });
     } catch (error) {
-      console.log("获取上传图片",error);
+      console.log("获取上传图片", error);
     }
-  };
+  }
 
   componentDidMount() {
     this.getData();
