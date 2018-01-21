@@ -58,7 +58,6 @@ const MainPageSetting = props => {
         dataSource={bannerData2}
         renderItem={item => (
           <List.Item>
-            {console.log("88888", item.fileName)}
             <List.Item.Meta
               title={<UploadImg fileName={item.fileName} type={item.type} />}
             />
@@ -105,6 +104,9 @@ const AdminPage = props => {
         </TabPane>
         <TabPane tab="全景图" key="3">
           全景图
+        </TabPane>
+        <TabPane tab="管理员账号设置" key="4">
+          管理员账号设置
         </TabPane>
       </Tabs>
     </div>
