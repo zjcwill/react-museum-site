@@ -1,27 +1,33 @@
 import mirror, { actions, connect } from 'mirrorx';
+import { loadBanner } from '../../services/indexPage';
+import _ from "lodash";
 
 const container = mirror.model({
     name: "IndexPage",
     initialState: {
         hello: 'world!!',
-        isLoading:true,
+        isLoading: true,
         bannerURL: []
     },
     reducers: {
         save(state, data) {
             return { ...state, ...data }
         },
-       
+
     },
     effects: {
-        async getBannerURL(){
-            actions.IndexPage.save({
-                bannerURL: ["http://via.placeholder.com/2000x500",
-                "http://via.placeholder.com/2000x500",
-                "http://via.placeholder.com/2000x500",
-                "http://via.placeholder.com/2000x500"]
+        async getBannerURL() {
+            let { data: { results } } = await loadBanner();
+            results = _.groupBy(results, "name");
+            let bannerURL = [];
+            _.forEach(results,(elements)=>{
+                elements = _.maxBy(elements, item => item.createdAt);
+                bannerURL.push(elements.picture.url);
             })
-            actions.IndexPage.save({isLoading:false})
+            actions.IndexPage.save({
+                bannerURL: bannerURL,
+                isLoading: false
+            });
         }
     },
 });

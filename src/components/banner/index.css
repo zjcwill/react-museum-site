@@ -8,3 +8,12 @@
 .ant-carousel .slick-slide h3 {
   color: #fff;
 }
+
+img{
+  width: 100%;
+  height: 500px;
+}
+
+.ant-carousel .slick-slide {
+  height: 500px !important;
+}

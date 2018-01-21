@@ -1,4 +1,5 @@
 import axios from "axios";
+import { xLCId, xLCKey } from "../utils/globalKey";
 
 const headers = {
   "X-LC-Id": xLCId,
