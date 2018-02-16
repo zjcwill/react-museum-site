@@ -26,9 +26,6 @@ const error = () => {
 };
 
 class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   handleSubmit = e => {
     e.preventDefault();

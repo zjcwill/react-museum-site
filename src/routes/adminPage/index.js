@@ -15,6 +15,7 @@ import { appId, appKey, xLCId, xLCKey } from "../../utils/globalKey";
 import AV from "leancloud-storage";
 import axios from "axios";
 import _ from "lodash";
+import { connect } from 'mirrorx';
 
 const { TabPane } = Tabs;
 const Search = Input.Search;
@@ -32,7 +33,7 @@ const AdminAccountSetting = props => {
     <Card title="管理员账号设置">
       <Row>
         <Col span={6}>
-          <Input value="Admin" disabled="true" />
+          <Input value="zjcwill@foxmail.com" />
         </Col>
       </Row>
       <Row style={{marginTop:"10px"}}>
@@ -43,7 +44,7 @@ const AdminAccountSetting = props => {
     </Card>
   );
 };
-//主页设置
+//# 主页设置
 const MainPageSetting = props => {
   const bannerData = [
     {
@@ -78,8 +79,7 @@ const MainPageSetting = props => {
       fileName: "banner4"
     }
   ];
-  //主页
-  //轮播图设置
+  //## 轮播图设置
   const bannerSetting = (
     <Card title="轮播图">
       <List
@@ -95,7 +95,7 @@ const MainPageSetting = props => {
       />
     </Card>
   );
-  //活动设置
+  //## 活动设置
   const activitySetting = (
     <Card title="活动">
       <List
@@ -121,7 +121,22 @@ const MainPageSetting = props => {
   );
 };
 
-const AdminPage = props => {
+//# 全景图
+const ViewerSetting = ()=>{
+  return (
+    <div>
+      <Row>
+        <Col>
+          <Button>新增全景图</Button>
+        </Col>
+      </Row>
+      <Row></Row>
+    </div>
+  )
+}
+
+
+const AdminPage = connect()(props => {
   return (
     <div>
       <Tabs>
@@ -132,7 +147,7 @@ const AdminPage = props => {
           资讯
         </TabPane>
         <TabPane tab="全景图" key="3">
-          全景图
+          {ViewerSetting()}
         </TabPane>
         <TabPane tab="管理员账号设置" key="4">
           {AdminAccountSetting()}
@@ -140,7 +155,7 @@ const AdminPage = props => {
       </Tabs>
     </div>
   );
-};
+})
 
 //上传图片组件
 class UploadImg extends React.Component {
@@ -199,7 +214,7 @@ class UploadImg extends React.Component {
   //获取图片在同一表中名字相同，时间最新的一个
   getData() {
     try {
-      let data = axios({
+      axios({
         url: `https://hd7nxqxs.api.lncld.net/1.1/classes/${this.props.type}`,
         method: "GET",
         headers: { ...headers, "Content-Type": "application/json" }
