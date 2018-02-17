@@ -9,7 +9,10 @@ import {
   Button,
   Icon,
   Spin,
-  Input
+  Input,
+  Modal,
+  Table,
+  Divider
 } from "antd";
 import { appId, appKey, xLCId, xLCKey } from "../../utils/globalKey";
 import AV from "leancloud-storage";
@@ -122,17 +125,87 @@ const MainPageSetting = props => {
 };
 
 //# 全景图
-const ViewerSetting = ()=>{
-  return (
-    <div>
-      <Row>
-        <Col>
-          <Button>新增全景图</Button>
-        </Col>
-      </Row>
-      <Row></Row>
-    </div>
-  )
+
+//全景图表格
+//表头
+const columns = [{
+  title: '名称',
+  dataIndex: 'name',
+  key: 'name',
+}, {
+  title: '简介',
+  dataIndex: 'intr',
+  key: 'intr',
+}, {
+  title: '操作',
+  key: 'action',
+  render: (text, record) => (
+    <span>
+      <a href="#">编辑</a>
+      <Divider type="vertical" />
+      <a href="#">删除</a>
+    </span>
+  ),
+}];
+//测试数据
+const testData = [{
+  key: '1',
+  name: 'John Brown',
+  intr: 'New York No. 1 Lake Park',
+}, {
+  key: '2',
+  name: 'Jim Green',
+  intr: 'London No. 1 Lake Park',
+}, {
+  key: '3',
+  name: 'Joe Black',
+  intr: 'Sidney No. 1 Lake Park',
+}];
+
+//## 全景图设置
+class ViewerSetting extends React.Component {
+  state = { visible: false }
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+  handleOk = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  }
+  handleCancel = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  }
+  render() {
+    return (
+      <div>
+        <Row>
+          <Button type="primary" onClick={this.showModal}>添加全景图</Button>
+        </Row>
+        <Modal
+          title="Basic Modal"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
+        <Row style={{marginTop:"20px"}}>
+          <Card>
+            <Table columns={columns} dataSource={testData} />
+          </Card>
+        </Row>
+      </div>
+    );
+  }
 }
 
 
@@ -147,7 +220,7 @@ const AdminPage = connect()(props => {
           资讯
         </TabPane>
         <TabPane tab="全景图" key="3">
-          {ViewerSetting()}
+          <ViewerSetting />
         </TabPane>
         <TabPane tab="管理员账号设置" key="4">
           {AdminAccountSetting()}
