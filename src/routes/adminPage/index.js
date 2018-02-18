@@ -12,16 +12,23 @@ import {
   Input,
   Modal,
   Table,
-  Divider
+  Divider,
+  Form,
+  Select,
+  Radio
 } from "antd";
 import { appId, appKey, xLCId, xLCKey } from "../../utils/globalKey";
 import AV from "leancloud-storage";
 import axios from "axios";
 import _ from "lodash";
-import { connect } from 'mirrorx';
+import { connect } from "mirrorx";
 
 const { TabPane } = Tabs;
 const Search = Input.Search;
+const FormItem = Form.Item;
+const Option = Select.Option;
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
 
 //上传图片头部
 const headers = {
@@ -39,7 +46,7 @@ const AdminAccountSetting = props => {
           <Input value="zjcwill@foxmail.com" />
         </Col>
       </Row>
-      <Row style={{marginTop:"10px"}}>
+      <Row style={{ marginTop: "10px" }}>
         <Col span={6}>
           <Search placeholder="输入新密码" type="password" enterButton="设置" />
         </Col>
@@ -128,77 +135,170 @@ const MainPageSetting = props => {
 
 //全景图表格
 //表头
-const columns = [{
-  title: '名称',
-  dataIndex: 'name',
-  key: 'name',
-}, {
-  title: '简介',
-  dataIndex: 'intr',
-  key: 'intr',
-}, {
-  title: '操作',
-  key: 'action',
-  render: (text, record) => (
-    <span>
-      <a href="#">编辑</a>
-      <Divider type="vertical" />
-      <a href="#">删除</a>
-    </span>
-  ),
-}];
+const columns = [
+  {
+    title: "名称",
+    dataIndex: "name",
+    key: "name"
+  },
+  {
+    title: "简介",
+    dataIndex: "intr",
+    key: "intr"
+  },
+  {
+    title: "操作",
+    key: "action",
+    render: (text, record) => (
+      <span>
+        <a href="#">编辑</a>
+        <Divider type="vertical" />
+        <a href="#">删除</a>
+      </span>
+    )
+  }
+];
 //测试数据
-const testData = [{
-  key: '1',
-  name: 'John Brown',
-  intr: 'New York No. 1 Lake Park',
-}, {
-  key: '2',
-  name: 'Jim Green',
-  intr: 'London No. 1 Lake Park',
-}, {
-  key: '3',
-  name: 'Joe Black',
-  intr: 'Sidney No. 1 Lake Park',
-}];
+const testData = [
+  {
+    key: "1",
+    name: "John Brown",
+    intr: "New York No. 1 Lake Park"
+  },
+  {
+    key: "2",
+    name: "Jim Green",
+    intr: "London No. 1 Lake Park"
+  },
+  {
+    key: "3",
+    name: "Joe Black",
+    intr: "Sidney No. 1 Lake Park"
+  }
+];
+//## 新建全景图Modal
+const ViewSettingForm = Form.create()(props => {
+  const { visible, onCancel, onCreate, form } = props;
+  const { getFieldDecorator } = form;
+
+  return (
+    <Modal
+      visible={visible}
+      title="Create a new collection"
+      okText="Create"
+      onCancel={onCancel}
+      onOk={onCreate}
+    >
+      <Form layout="vertical">
+        <FormItem label="名称">
+          {getFieldDecorator("name", {
+            rules: [
+              {
+                required: true,
+                message: "Please input the name of collection!"
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+        <FormItem label="简介">
+          {getFieldDecorator("intr", {
+            rules: [
+              {
+                required: true,
+                message: "Please input the title of collection!"
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+        <FormItem
+          label="Dragger"
+        >
+          <div className="dropbox">
+            {getFieldDecorator('dragger')(
+              <Upload.Dragger name="files" action="https://sm.ms/api/upload" headers={{"Access-Control-Allow-Origin":"*"}}>
+                <p className="ant-upload-drag-icon">
+                  <Icon type="inbox" />
+                </p>
+                <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                <p className="ant-upload-hint">Support for a single or bulk upload.</p>
+              </Upload.Dragger>
+            )}
+          </div>
+        </FormItem>
+      </Form>
+    </Modal>
+  );
+});
+//## 新增全景图btn
+class ViewSettingBtn extends React.Component {
+  state = {
+    visible: false
+  };
+  showModal = () => {
+    this.setState({ visible: true });
+  };
+  handleCancel = () => {
+    this.setState({ visible: false });
+  };
+  handleCreate = () => {
+    const form = this.form;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+
+      console.log("Received values of form: ", values);
+      form.resetFields();
+      this.setState({ visible: false });
+    });
+  };
+  saveFormRef = form => {
+    this.form = form;
+  };
+  render() {
+    return (
+      <div>
+        <Button type="primary" onClick={this.showModal}>
+          新增全景图
+        </Button>
+        <ViewSettingForm
+          ref={this.saveFormRef}
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={this.handleCreate}
+        />
+      </div>
+    );
+  }
+}
 
 //## 全景图设置
 class ViewerSetting extends React.Component {
-  state = { visible: false }
+  state = { visible: false };
   showModal = () => {
     this.setState({
-      visible: true,
+      visible: true
     });
-  }
-  handleOk = (e) => {
+  };
+  handleOk = e => {
     console.log(e);
     this.setState({
-      visible: false,
+      visible: false
     });
-  }
-  handleCancel = (e) => {
+  };
+  handleCancel = e => {
     console.log(e);
     this.setState({
-      visible: false,
+      visible: false
     });
-  }
+  };
   render() {
     return (
       <div>
         <Row>
-          <Button type="primary" onClick={this.showModal}>添加全景图</Button>
+          <ViewSettingBtn />
         </Row>
-        <Modal
-          title="Basic Modal"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
-        <Row style={{marginTop:"20px"}}>
+        <Row style={{ marginTop: "20px" }}>
           <Card>
             <Table columns={columns} dataSource={testData} />
           </Card>
@@ -207,7 +307,6 @@ class ViewerSetting extends React.Component {
     );
   }
 }
-
 
 const AdminPage = connect()(props => {
   return (
@@ -228,7 +327,7 @@ const AdminPage = connect()(props => {
       </Tabs>
     </div>
   );
-})
+});
 
 //上传图片组件
 class UploadImg extends React.Component {
