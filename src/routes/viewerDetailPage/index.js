@@ -1,7 +1,7 @@
 import React from 'react';
 import mirror, { actions, connect } from 'mirrorx';
 import ReactSphereViewer from '../../utils/reactSphereViewer';
-import src from './example.jpg';
+import img from './example.jpg';
 
 mirror.model({
     name: 'viewerDetails',
@@ -41,7 +41,7 @@ const App = connect(state => state)(props => {
     return (<div>
         <p>{props.match.params.id}</p>
         <p>{viewerDetails.test}</p>
-        <ReactSphereViewer src={src} options={Options()}></ReactSphereViewer>
+        <ReactSphereViewer src={img} options={Options()}></ReactSphereViewer>
     </div>)
 });
 

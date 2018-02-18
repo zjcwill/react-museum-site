@@ -11,6 +11,7 @@
     "photo-sphere-viewer-sa": "^3.2.0",
     "prop-types": "^15.6.0",
     "qs": "^6.5.1",
+    "query-string": "^5.1.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-scripts": "1.0.17",

@@ -5,7 +5,6 @@ import _ from "lodash";
 const container = mirror.model({
     name: "IndexPage",
     initialState: {
-        hello: 'world!!',
         isLoading: true,
         bannerURL: []
     },
