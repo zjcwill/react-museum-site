@@ -24,7 +24,7 @@ const MainRouter = () => (
         <Route path="/news" component={NewsPage} />
         <Route path="/newsPage/:type/:id" component={NewsDetailPage} />
         <Route path="/viewerIndex" component={ViewerIndexPage} />
-        <Route path="/viewer/:id" component={ViewerDetailPage} />
+        <Route path="/viewer" component={ViewerDetailPage} />
         <Route path="/admin" component={AdminPage} />
         <Route path="/signin" component={SigninPage}/>
       </div>

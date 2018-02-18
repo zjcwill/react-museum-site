@@ -21,3 +21,14 @@ export function loadViewer(options = { "Content-Type": "application/json" }){
     headers: {...headers,...options}
   });
 }
+//获取指定漫游图资源
+export function loadTheViewer(id,options = { "Content-Type": "application/json" }){
+  return axios({
+    method: "GET",
+    params: {
+      where:{"name":`viewer${id}`}
+    },
+    url: "https://hd7nxqxs.api.lncld.net/1.1/classes/Viewer",
+    headers: {...headers,...options}
+  });
+}
