@@ -21,7 +21,7 @@ import { appId, appKey, xLCId, xLCKey } from "../../utils/globalKey";
 import AV from "leancloud-storage";
 import axios from "axios";
 import _ from "lodash";
-import { connect } from "mirrorx";
+import { connect,actions } from "mirrorx";
 
 const { TabPane } = Tabs;
 const Search = Input.Search;
@@ -187,9 +187,20 @@ const AdminPage = connect()(props => {
       </TabPane>
     </Tabs>
   </div>):
-   (<div>
-     尚未登陆
-   </div>)
+   (<Row type="flex" align="middle" justify="center">
+     <Col>
+     <div style={{minHeight:'500px',fontSize:'30px',paddingTop:'100px',textAlign:'center'}}>
+        <p style={{paddingBottom:'100px'}}>尚未登陆，无法访问该页面</p>
+        <Button 
+          type="primary"
+          size="large" 
+          onClick={()=>{
+          actions.routing.push("/signin");
+        }
+        }>返回登陆页面</Button>
+     </div>
+     </Col>
+   </Row>)
   );
 });
 
