@@ -19,9 +19,8 @@ mirror.model({
     },
     effects: {
         async getImgUrl(id, getState) {
-            const { data : { results } } = await loadTheViewer(id);
+            const { data : { results } } = await loadTheViewer(parseInt(id+1));
             actions.viewerDetails.save({imgUrl:results.pop().picture.url})
-            // actions.app.increment()
         }
     }
 });
