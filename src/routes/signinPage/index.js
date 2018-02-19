@@ -58,8 +58,8 @@ class LoginForm extends React.Component {
             const { data } = resp;
             if(values.userName===data.email && values.password===data.password){
                 success();
-                actions.SigninPage.changeLogin(true)
-                this.props.history.push("/admin", null);
+                actions.SigninPage.changeLogin(true);
+                actions.routing.push("/admin");
             } else {
                 error();
                 return;
