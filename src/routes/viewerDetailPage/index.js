@@ -68,8 +68,7 @@ const App = connect(state => state)(props => {
         <Row>
             <ReactSphereViewer src={imgUrl} options={Options()}></ReactSphereViewer>
         </Row>
-        )
-      
+        )   
     )
 });
 

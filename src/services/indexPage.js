@@ -13,7 +13,7 @@ export function loadBanner(options = { "Content-Type": "application/json" }) {
     headers: { ...headers, ...options }
   });
 }
-//获取漫游图资源
+//获取所有漫游图资源
 export function loadViewer(options = { "Content-Type": "application/json" }){
   return axios({
     method: "GET",
