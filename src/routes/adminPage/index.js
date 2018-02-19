@@ -170,22 +170,26 @@ const ViewerSetting  = () => {
  
 const AdminPage = connect()(props => {
   return (
-    <div>
-      <Tabs>
-        <TabPane tab="主页" key="1">
-          {MainPageSetting()}
-        </TabPane>
-        <TabPane tab="资讯" key="2">
-          资讯
-        </TabPane>
-        <TabPane tab="全景图" key="3">
-         {ViewerSetting()}
-        </TabPane>
-        <TabPane tab="管理员账号设置" key="4">
-          {AdminAccountSetting()}
-        </TabPane>
-      </Tabs>
-    </div>
+   props.data.isLogined?
+   ( <div>
+    <Tabs>
+      <TabPane tab="主页" key="1">
+        {MainPageSetting()}
+      </TabPane>
+      <TabPane tab="资讯" key="2">
+        资讯
+      </TabPane>
+      <TabPane tab="全景图" key="3">
+       {ViewerSetting()}
+      </TabPane>
+      <TabPane tab="管理员账号设置" key="4">
+        {AdminAccountSetting()}
+      </TabPane>
+    </Tabs>
+  </div>):
+   (<div>
+     尚未登陆
+   </div>)
   );
 });
 
@@ -296,4 +300,6 @@ class UploadImg extends React.Component {
   }
 }
 
-export default AdminPage;
+export default connect(state=>{
+  return {data:state.SigninPage}
+})(AdminPage);

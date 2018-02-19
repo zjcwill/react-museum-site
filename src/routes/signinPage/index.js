@@ -12,6 +12,23 @@ import {
 import { xLCId, xLCKey } from "../../utils/globalKey";
 import axios from "axios";
 import "./index.css";
+import mirror, {actions} from 'mirrorx';
+
+mirror.model({
+  name:"SigninPage",
+  initialState:{
+    isLogined:false
+  },
+  reducers:{
+    save(state, data) {
+      return { ...state, ...data };
+    },
+    changeLogin(state,data){      
+     return {...state,...{isLogined:data}}
+    }
+  }
+})
+
 
 const FormItem = Form.Item;
 const headers = {
@@ -41,6 +58,7 @@ class LoginForm extends React.Component {
             const { data } = resp;
             if(values.userName===data.email && values.password===data.password){
                 success();
+                actions.SigninPage.changeLogin(true)
                 this.props.history.push("/admin", null);
             } else {
                 error();
