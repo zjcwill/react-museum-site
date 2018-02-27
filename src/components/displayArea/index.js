@@ -20,18 +20,7 @@ const DisplayCard = () => (
 
 const DisplayArea = () => (
     <Row className="displayarea-container">
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
+      
     </Row>
 );
 
