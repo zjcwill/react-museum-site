@@ -4,6 +4,7 @@ import { Row, Col, Spin } from "antd";
 import { loadViewer } from "../../services/indexPage";
 import _ from "lodash";
 import qs from "query-string";
+import "./style.css";
 
 mirror.model({
   name: "ViewIndexPage",
@@ -48,8 +49,8 @@ mirror.hook((action, getState) => {
 const ViewImgPreview = props => {
   const defaultImg = props.imgUrl || "http://via.placeholder.com/1200x400";
   return (
-    <Link to={{pathname:`/viewer`,search:`?id=${props.index}`}}>
-      <img style={{ width: "100%", height: "400px" }} alt="" src={defaultImg} />
+    <Link className={"viewer"} to={{pathname:`/viewer`,search:`?id=${props.index}`}}>
+      <img alt="" src={defaultImg} />
     </Link>
   );
 };

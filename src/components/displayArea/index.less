@@ -6,9 +6,24 @@
     overflow: hidden;
     min-width: 100%;
     // overflow-x:scroll; 
+    position: relative;
+    img {
+        height: 100%;
+        position: absolute;
+        left:0;
+        animation:mymove 400s infinite;
+    }
+
+    @keyframes mymove
+        {
+        from {left:0px;}
+        to {left:-8000px;}
+        }
+
 }
 
 .displayarea-card {
     width: 200;
     margin-right: 20px;
 }
+
