@@ -1,20 +1,4 @@
 import React from "react";
-<<<<<<< HEAD:src/routes/viewerIndexPage/index.js
-import { Link } from 'mirrorx';
-
-//图片预览图
-//{parmas} url imgUrl
-const ViewImgPreview = (props) => {
-    const defaultImg = props.imgUrl || "http://via.placeholder.com/1200x400";
-    return (
-        <Link to={"viewer/"+props.href}>
-            <img
-                style={{ width: "100%", height: "400px" }}
-                src={defaultImg} />
-        </Link>
-    )
-}
-=======
 import mirror, { Link, actions, connect } from "mirrorx";
 import { Row, Col, Spin } from "antd";
 import { loadViewer } from "../../services/indexPage";
@@ -52,7 +36,6 @@ mirror.model({
 
 mirror.hook((action, getState) => {
   const { routing: { location } } = getState();
->>>>>>> sprint180109:src/routes/viewIndexPage/index.js
 
   if (
     action.type === "@@router/LOCATION_CHANGE" &&
@@ -74,23 +57,6 @@ const ViewImgPreview = props => {
 
 //页面
 class ViewIndexPage extends React.Component {
-<<<<<<< HEAD:src/routes/viewerIndexPage/index.js
-    render() {
-        return (
-            <div>
-                <ViewImgPreview url="" href="1"/>
-                <ViewImgPreview url="" />
-                <ViewImgPreview url="" />
-                <ViewImgPreview url="" />
-            </div>
-        )
-    }
-}
-
-
-
-export default ViewIndexPage;
-=======
   render() {
     return this.props.data.viewerURL.length > 0 ? (
       this.props.data.viewerURL.map((item, index) => {
@@ -109,4 +75,3 @@ export default ViewIndexPage;
 export default connect(state => {
   return { data: state.ViewIndexPage };
 })(ViewIndexPage);
->>>>>>> sprint180109:src/routes/viewIndexPage/index.js
