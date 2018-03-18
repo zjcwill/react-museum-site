@@ -1,6 +1,6 @@
 import React from "react";
 import mirror, { actions, connect, Link } from "mirrorx";
-import { Row, Col, Card, Tabs, Button, Spin } from "antd";
+import { Row, Col, Card, Tabs, Button, Spin, Divider } from "antd";
 import "./index.css";
 import { getArticle } from "../../services/indexPage";
 import _ from "lodash";
@@ -58,18 +58,6 @@ mirror.hook((action, getState) => {
 //占位图统一格式
 const placeholdImg = { width: "100%", height: "200px" };
 
-// connect state with component
-const App = connect()(props => (
-  <div>
-    <h1>{props.count}</h1>
-    {/* dispatch the actions */}
-    <button onClick={() => actions.app.decrement()}>-</button>
-    <button onClick={() => actions.app.increment()}>+</button>
-    {/* dispatch the async action */}
-    <button onClick={() => actions.app.incrementAsync()}>+ Async</button>
-  </div>
-));
-
 //馆内公告
 const MuseumNews = props => {
   return (
@@ -84,7 +72,7 @@ const BoradInformation = props => {
   console.log("公告栏", props.data);
   return (
     <Row style={{ paddingTop: "20px" }}>
-      <Col span={8}>
+      <Col span={12}>
         <Card
           title="公告栏"
           style={{ width: "100%", maxHeight: "200px" }}
@@ -92,11 +80,17 @@ const BoradInformation = props => {
           className="news-card-item"
         >
           {props.data.length > 0 ? (
-            props.data.map((item,index) => {
+            props.data.map((item, index) => {
               return (
-                <Link to={`/detailPage/?class=notice;id=${item.objectId}`} key={index}>
-                  <p>{item.title}</p>
-                </Link>
+                <div>
+                  <Link
+                    to={`/detailPage/?class=notice;id=${item.objectId}`}
+                    key={index}
+                  >
+                    <p>{item.title}</p>
+                  </Link>
+                  {index != props.data.length - 1 ? <Divider /> : null}
+                </div>
               );
             })
           ) : (
@@ -104,7 +98,7 @@ const BoradInformation = props => {
           )}
         </Card>
       </Col>
-      <Col span={16} style={{ paddingLeft: "20px" }}>
+      <Col offset={1} span={11}>
         <img style={placeholdImg} src="http://via.placeholder.com/800x200" />
       </Col>
     </Row>
@@ -119,46 +113,24 @@ const MuseumQuickInfo = props => {
       loading={false}
       className="news-card-item"
     >
-      {props.data.length > 0 ? (
-            props.data.map((item,index) => {
-              return (
-                <Link to={`/detailPage/?class=quickInfo;id=${item.objectId}`} key={index}>
-                  <p>{item.title}</p>
-                </Link>
-              );
-            })
-          ) : (
-            <Spin />
-          )}
-    </Card>
-  );
-};
-
-//互联网新闻系统
-const InternentNews = props => {
-  return (
-    <Card
-      title="互联网新闻"
-      style={{ width: "90%", height: "400px", marginLeft: "20px" }}
-      loading={false}
-      className="news-card-item"
-    >
-      <Tabs
-        defaultActiveKey="1"
-        onChange={e => {
-          console.log(e);
-        }}
-      >
-        <TabPane tab="新闻" key="1">
-          Content of Tab Pane 1
-        </TabPane>
-        <TabPane tab="娱乐" key="2">
-          Content of Tab Pane 2
-        </TabPane>
-        <TabPane tab="科技" key="3">
-          Content of Tab Pane 3
-        </TabPane>
-      </Tabs>
+      {
+        props.data.length > 0 ? (
+        props.data.map((item, index) => {
+          return (
+            <div>
+              <Link
+                to={`/detailPage/?class=quickInfo;id=${item.objectId}`}
+                key={index}
+              >
+                <p>{item.title}</p>
+              </Link>
+              {index != props.data.length - 1 ? <Divider /> : null}
+            </div>
+          );
+        })
+      ) : (
+        <Spin />
+      )}
     </Card>
   );
 };
@@ -219,13 +191,10 @@ const NewsPage = connect(state => {
     <div style={{ minWidth: "1200px" }}>
       <MuseumNews data={props.data.notice} />
       <Row style={{ paddingTop: "20px" }}>
-        <Col span={8}>
+        <Col span={12}>
           <MuseumQuickInfo data={props.data.quickNews} />
         </Col>
-        <Col span={8}>
-          <InternentNews />
-        </Col>
-        <Col span={8}>
+        <Col offset={1} span={11}>
           <PlaceHoldImg />
           <FriendLink />
         </Col>
