@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Card } from 'antd';
 import './index.css';
-
+import longPic from './img/qinming.png';
 const { Meta } = Card;
 
 const DisplayCard = () => (
@@ -18,21 +18,34 @@ const DisplayCard = () => (
     </Col>
 );
 
-const DisplayArea = () => (
-    <Row className="displayarea-container">
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-        <DisplayCard />
-    </Row>
-);
+
+class DisplayArea extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            marginLeft: 0
+        }
+    }
+
+    scrollImg(){        
+        this.setState((preState)=>{
+            const marginLeft = preState.marginLeft -1;
+            console.log(marginLeft);
+            return {marginLeft: marginLeft}
+        });
+    }
+
+    componentDidMount(){
+       
+    }
+
+    render() {
+        return (
+            <Row className="displayarea-container">
+                <img src={longPic} />
+            </Row>
+        )
+    }
+}
 
 export default DisplayArea;

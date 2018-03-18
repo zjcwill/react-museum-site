@@ -6,54 +6,39 @@ import ReduxDemo from '../demo/redux';
 import { Layout } from 'antd';
 import IndexPage from './IndexPage';
 import NewsPage from './newsPage';
+<<<<<<< HEAD
 import ViewerIndexPage from './viewerIndexPage';
+=======
+import NewsDetailPage from './newsDetailPage';
+import ViewerIndexPage from './viewIndexPage';
+>>>>>>> sprint180109
 import ViewerDetailPage from './viewerDetailPage';
+import AdminPage from './adminPage';
+import SigninPage from './signinPage';
+
 const { Content } = Layout;
 
 const MainRouter = () => (
   <Layout>
-    <Header />
-    {/*测试路由*/}
+    <Route path="*" component={Header}/>
     <Content>
-      {/*首页轮播图不需要留白*/}
       <Route exact path="/" component={IndexPage}/>
       <div style={{padding:"0 50px"}}>
         <Route path="/reduxDemo" component={ReduxDemo} />
         <Route path="/news" component={NewsPage} />
+        <Route path="/detailPage/*" component={NewsDetailPage} />
         <Route path="/viewerIndex" component={ViewerIndexPage} />
+<<<<<<< HEAD
         <Route path="/viewer/:id" component={ViewerDetailPage} />
+=======
+        <Route path="/viewer" component={ViewerDetailPage} />
+        <Route path="/admin" component={AdminPage} />
+        <Route path="/signin" component={SigninPage}/>
+>>>>>>> sprint180109
       </div>
     </Content>
-    <Footer/>
+    <Route path="*" component={Footer}/>
   </Layout>
-)
-
-// const Home = () => (
-//   <div>
-//     <h2>Home</h2>
-//   </div>
-// )
-
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-)
-
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
-    <Route path={`${match.url}/:topicId`} component={Topic} />
-    <Route exact path={match.url} render={() => (
-      <h3>Please select a topic.</h3>
-    )} />
-  </div>
-)
-
-const Topic = ({ match }) => (
-  <div>
-    <h3>{match.params.topicId}</h3>
-  </div>
 )
 
 export default MainRouter;
