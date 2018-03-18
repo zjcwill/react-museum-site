@@ -22,6 +22,7 @@ import { connect,actions } from "mirrorx";
 
 import MainPageSetting from '../../components/admin/mainPageSetting';//主页设置
 import ViewerSetting from '../../components/admin/viewerSetting';//全景图设置组件
+import NewsSetting from '../../components/admin/newsSetting';//新闻设置组件
 import AdminAccountSetting from '../../components/admin/adminAccountSetting/index';//账号设置组件
 import UploadImg from '../../components/admin/uploadImg';//上传图片组件
 
@@ -33,15 +34,16 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
 const AdminPage = connect()(props => {
+  const isLogined = true || props.data.isLogined; //开发环境 默认登陆状态为真
   return (
-   props.data.isLogined?
+   isLogined ?
    ( <div>
     <Tabs>
       <TabPane tab="主页" key="1">
         {MainPageSetting()}
       </TabPane>
       <TabPane tab="资讯" key="2">
-        资讯
+        <NewsSetting/>
       </TabPane>
       <TabPane tab="全景图" key="3">
        {ViewerSetting()}

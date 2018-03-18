@@ -37,7 +37,7 @@ mirror.hook((action, getState) => {
     const { routing: { location } } = getState()
 
     if (action.type === "@@router/LOCATION_CHANGE" && location.pathname === '/') {
-        console.log("进入首页")
+        // console.log("进入首页")
         actions.IndexPage.getBannerURL()
     }
 })

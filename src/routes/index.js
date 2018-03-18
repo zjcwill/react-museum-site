@@ -22,7 +22,7 @@ const MainRouter = () => (
       <div style={{padding:"0 50px"}}>
         <Route path="/reduxDemo" component={ReduxDemo} />
         <Route path="/news" component={NewsPage} />
-        <Route path="/newsPage/:type/:id" component={NewsDetailPage} />
+        <Route path="/detailPage/*" component={NewsDetailPage} />
         <Route path="/viewerIndex" component={ViewerIndexPage} />
         <Route path="/viewer" component={ViewerDetailPage} />
         <Route path="/admin" component={AdminPage} />

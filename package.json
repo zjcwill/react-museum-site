@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.0.1",
     "axios": "^0.17.1",
+    "braft-editor": "^1.8.0",
     "leancloud-storage": "^3.5.0",
     "lodash": "^4.17.4",
     "mirrorx": "^0.2.10",
