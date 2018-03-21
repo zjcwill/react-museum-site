@@ -32,7 +32,7 @@ mirror.hook((action, getState) => {
     location.pathname === "/detailPage/" &&
     location.search
   ) {
-    console.log("!!!进入详情页", location.search);
+    // console.log("!!!进入详情页", location.search);
 
     const searchs = location.search.split(";");
     const category = searchs[0].split("=")[1];

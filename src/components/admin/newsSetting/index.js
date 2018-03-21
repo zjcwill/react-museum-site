@@ -10,12 +10,35 @@ import {
   Select
 } from "antd";
 // 引入编辑器以及编辑器样式
+import mirror, { actions, connect } from "mirrorx";
 import BraftEditor from "braft-editor";
 import "braft-editor/dist/braft.css";
 import "./index.css";
 
-import { newArticle } from "../../../services/indexPage";
+import { getArticle, newArticle } from "../../../services/indexPage";
 const { Option } = Select;
+
+mirror.model({
+  name: "NewSetting",
+  initialState: {
+    data: null
+  },
+  reducers: {
+    save(state, data) {
+      return { ...state, ...data };
+    }
+  },
+  effects: {
+    async getArticles() {
+      getArticle().then(resp => {
+        actions.NewSetting.save({
+          data: resp.data
+        });
+      });
+    }
+  }
+});
+
 class NewsSetting extends React.Component {
   constructor() {
     super();
@@ -136,9 +159,10 @@ class NewsSetting extends React.Component {
             <BraftEditor {...editorProps} />
           </Modal>
         </Row>
+        <Row>展示数据</Row>
       </div>
     );
   }
 }
 
-export default NewsSetting;
+export default connect()(NewsSetting);

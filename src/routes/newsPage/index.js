@@ -69,7 +69,6 @@ const MuseumNews = props => {
 
 //公告栏&重要活动（占位图）
 const BoradInformation = props => {
-  console.log("公告栏", props.data);
   return (
     <Row style={{ paddingTop: "20px" }}>
       <Col span={12}>
