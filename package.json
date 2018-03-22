@@ -9,6 +9,7 @@
     "leancloud-storage": "^3.5.0",
     "lodash": "^4.17.4",
     "mirrorx": "^0.2.10",
+    "moment": "^2.21.0",
     "photo-sphere-viewer-sa": "^3.2.0",
     "prop-types": "^15.6.0",
     "qs": "^6.5.1",

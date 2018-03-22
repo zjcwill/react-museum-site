@@ -7,9 +7,12 @@ import {
   Input,
   Alert,
   notification,
-  Select
+  Select,
+  Table,
+  Card
 } from "antd";
 // 引入编辑器以及编辑器样式
+import moment from 'moment';
 import mirror, { actions, connect } from "mirrorx";
 import BraftEditor from "braft-editor";
 import "braft-editor/dist/braft.css";
@@ -21,7 +24,8 @@ const { Option } = Select;
 mirror.model({
   name: "NewSetting",
   initialState: {
-    data: null
+    quickInfoData: [],
+    noticeData: []
   },
   reducers: {
     save(state, data) {
@@ -31,8 +35,13 @@ mirror.model({
   effects: {
     async getArticles() {
       getArticle().then(resp => {
+        const quickInfo = resp.data.results.filter((item) => item.category == 1);
+        const notice = resp.data.results.filter((item) => item.category == 2);
         actions.NewSetting.save({
-          data: resp.data
+          quickInfoData: quickInfo
+        });
+        actions.NewSetting.save({
+          noticeData: notice
         });
       });
     }
@@ -88,6 +97,7 @@ class NewsSetting extends React.Component {
         notification["success"]({
           message: "新建文章成功"
         });
+        actions.NewSetting.getArticles();
       } else {
         notification["error"]({
           message: JSON.stringify(resp)
@@ -115,19 +125,52 @@ class NewsSetting extends React.Component {
   };
 
   render() {
+    const { data: { quickInfoData, noticeData } } = this.props;
+
     const editorProps = {
       height: 500,
       contentFormat: "html",
       initialContent: "",
       onChange: this.handleChange
-      // onRawChange: this.handleRawChange
     };
+
+    const tableColumns = [{
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id'
+    }, {
+      title: '标题',
+      dataIndex: 'title',
+      key: 'title'
+    }, {
+      title: '更新时间',
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      render:(text)=>{
+        return (<span>
+          {moment(text).format('YYYY-MM-DD, h:mm:ss a')}
+        </span>)
+      }
+    }, {
+      title: '操作',
+      dataIndex: 'edit',
+      key: 'edit',
+      render: (text, record) => (
+        <span>
+          <a href="#">编辑</a>
+          <span className="ant-divider" />
+          <a href="#">删除</a>
+        </span>
+      )
+    }]
+
     return (
       <div>
         <Row>
           <Button type="primary" onClick={this.showModal}>
             新增文章
           </Button>
+          {/*新建文章弹窗*/}
           <Modal
             title="新增文章"
             width={"800px"}
@@ -159,10 +202,22 @@ class NewsSetting extends React.Component {
             <BraftEditor {...editorProps} />
           </Modal>
         </Row>
-        <Row>展示数据</Row>
+        {/*表格*/}
+        <Row>
+          <Card title="博物馆快讯" style={{marginTop:"20px"}}>
+            <Table rowKey="objectId" columns={tableColumns} row dataSource={quickInfoData}/>
+          </Card>
+        </Row>
+        <Row>
+          <Card title="公告栏" style={{marginTop:"20px"}}>
+            <Table rowKey="objectId" columns={tableColumns} dataSource={noticeData}/>
+          </Card>
+        </Row>
       </div>
     );
   }
 }
 
-export default connect()(NewsSetting);
+export default connect(state => {
+  return { data: state.NewSetting }
+})(NewsSetting);
