@@ -9,7 +9,8 @@ import {
   notification,
   Select,
   Table,
-  Card
+  Card,
+  Popconfirm
 } from "antd";
 // 引入编辑器以及编辑器样式
 import moment from 'moment';
@@ -18,7 +19,7 @@ import BraftEditor from "braft-editor";
 import "braft-editor/dist/braft.css";
 import "./index.css";
 
-import { getArticle, newArticle } from "../../../services/indexPage";
+import { getArticle, newArticle, editTheArticle, deleteTheArticle } from "../../../services/indexPage";
 const { Option } = Select;
 
 mirror.model({
@@ -56,7 +57,7 @@ class NewsSetting extends React.Component {
       editorTitle: "",
       editorCategory: "",
       editorContent: "",
-      editorId:"",
+      editorId: "",
       isEdit: false,
     };
   }
@@ -89,9 +90,27 @@ class NewsSetting extends React.Component {
       return;
     }
 
-    if(this.state.isEdit){
+    if (this.state.isEdit) {
       //编辑文章
-      
+      editTheArticle(this.state.editorId, {
+        title: this.state.editorTitle,
+        category: this.state.editorCategory,
+        content: this.state.editorContent
+      }).then((resp) => {
+        const error = resp.error || false;
+        if (!error) {
+          notification["success"]({
+            message: "编辑文章成功"
+          });
+        }
+        actions.NewSetting.getArticles();
+        this.setState({
+          visible: false,
+          editorTitle: "",
+          editorCategory: "",
+          editorContent: ""
+        });
+      })
     } else {
       //新建文章
       newArticle({
@@ -135,7 +154,7 @@ class NewsSetting extends React.Component {
     this.setState({ editorContent: content });
   };
   //编辑文章
-  hadndleEdit = (record) => {
+  handleEdit = (record) => {
     console.log("edit", record.content)
     this.setState({
       visible: true,
@@ -143,8 +162,35 @@ class NewsSetting extends React.Component {
       editorCategory: record.category,
       editorContent: record.content,
       isEdit: true,
-      contentId: record.objectId
+      editorId: record.objectId
     })
+  }
+  //删除文章
+  handleDelete = (id) => {    
+
+    function confirm(e) {
+      deleteTheArticle(id).then((resp) => {
+        const error = resp.error || false;
+        if (!error) {
+          notification["success"]({
+            message: "删除文章成功"
+          });
+          actions.NewSetting.getArticles();
+          this.setState({
+            visible: false,
+            editorTitle: "",
+            editorCategory: "",
+            editorContent: ""
+          });
+        }
+      })
+    }
+
+    return (
+      <Popconfirm title="Are you sure delete this task?" onConfirm={confirm} okText="确定" cancelText="取消">
+        <a href="#">删除</a>
+      </Popconfirm>
+    )
   }
 
   render() {
@@ -153,7 +199,7 @@ class NewsSetting extends React.Component {
       height: 500,
       contentFormat: "html",
       initialContent: this.state.editorContent,
-      contentId: this.state.isEdit?this.state.editorId:null,
+      contentId: this.state.isEdit ? this.state.editorId : null,
       onChange: this.handleChange
     };
 
@@ -182,9 +228,9 @@ class NewsSetting extends React.Component {
         const that = this;
         return (
           <span>
-            <a onClick={() => { that.hadndleEdit(record) }}>编辑</a>
+            <a onClick={() => { that.handleEdit(record) }}>编辑</a>
             <span className="ant-divider" />
-            <a href="#">删除</a>
+            {this.handleDelete(record.objectId)}
           </span>
         )
       }

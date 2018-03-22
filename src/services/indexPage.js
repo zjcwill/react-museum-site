@@ -33,6 +33,25 @@ export function getTheArticle(id){
     headers:{...headers},
   })
 }
+//编辑指定ID文章
+export function editTheArticle(id,data){
+  //@id = objectId
+  return axios({
+    method:"PUT",
+    url:`https://hd7nxqxs.api.lncld.net/1.1/classes/Article/${id}`,
+    headers:{...headers},
+    data:data
+  })
+}
+//删除指定ID文章
+export function deleteTheArticle(id){
+  //@id = objectId
+  return axios({
+    method:"DELETE",
+    url:`https://hd7nxqxs.api.lncld.net/1.1/classes/Article/${id}`,
+    headers:{...headers}
+  })
+}
 
 //获取banner图片
 export function loadBanner(options = { "Content-Type": "application/json" }) {
