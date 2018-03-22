@@ -20,7 +20,7 @@ mirror.model({
   effects: {
     async getNewsTitleAndId() {
       getArticle().then(resp => {
-        console.log(resp);
+        // console.log(resp);
         const results = _.get(resp, "data.results");
         if (results) {
           const notice = []; //公告
@@ -84,7 +84,7 @@ const BoradInformation = props => {
                 <div>
                   <Link
                     to={`/detailPage/?class=notice;id=${item.objectId}`}
-                    key={index}
+                    key={item.objectId}
                   >
                     <p>{item.title}</p>
                   </Link>
@@ -119,7 +119,7 @@ const MuseumQuickInfo = props => {
             <div>
               <Link
                 to={`/detailPage/?class=quickInfo;id=${item.objectId}`}
-                key={index}
+                key={item.objectId}
               >
                 <p>{item.title}</p>
               </Link>

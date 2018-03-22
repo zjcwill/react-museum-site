@@ -55,7 +55,9 @@ class NewsSetting extends React.Component {
       visible: false,
       editorTitle: "",
       editorCategory: "",
-      editorContent: ""
+      editorContent: "",
+      editorId:"",
+      isEdit: false,
     };
   }
   handleSelectHandle = val => {
@@ -86,34 +88,43 @@ class NewsSetting extends React.Component {
       });
       return;
     }
-    newArticle({
-      id: new Date().getTime(),
-      title: this.state.editorTitle,
-      category: this.state.editorCategory,
-      content: this.state.editorContent
-    }).then(resp => {
-      const error = resp.error || false;
-      if (!error) {
-        notification["success"]({
-          message: "新建文章成功"
-        });
-        actions.NewSetting.getArticles();
-      } else {
-        notification["error"]({
-          message: JSON.stringify(resp)
-        });
-      }
-    });
-    this.setState({
-      visible: false,
-      editorTitle: "",
-      editorCategory: "",
-      editorContent: ""
-    });
+
+    if(this.state.isEdit){
+      //编辑文章
+      
+    } else {
+      //新建文章
+      newArticle({
+        id: new Date().getTime(),
+        title: this.state.editorTitle,
+        category: this.state.editorCategory,
+        content: this.state.editorContent
+      }).then(resp => {
+        const error = resp.error || false;
+        if (!error) {
+          notification["success"]({
+            message: "新建文章成功"
+          });
+          actions.NewSetting.getArticles();
+          this.setState({
+            visible: false,
+            editorTitle: "",
+            editorCategory: "",
+            editorContent: ""
+          });
+        } else {
+          notification["error"]({
+            message: JSON.stringify(resp)
+          });
+        }
+      });
+    }
+
   };
   handleCancel = e => {
     this.setState({
       visible: false,
+      isEdit: false,
       editorTitle: "",
       editorCategory: "",
       editorContent: ""
@@ -123,14 +134,26 @@ class NewsSetting extends React.Component {
   handleChange = content => {
     this.setState({ editorContent: content });
   };
+  //编辑文章
+  hadndleEdit = (record) => {
+    console.log("edit", record.content)
+    this.setState({
+      visible: true,
+      editorTitle: record.title,
+      editorCategory: record.category,
+      editorContent: record.content,
+      isEdit: true,
+      contentId: record.objectId
+    })
+  }
 
   render() {
     const { data: { quickInfoData, noticeData } } = this.props;
-
     const editorProps = {
       height: 500,
       contentFormat: "html",
-      initialContent: "",
+      initialContent: this.state.editorContent,
+      contentId: this.state.isEdit?this.state.editorId:null,
       onChange: this.handleChange
     };
 
@@ -146,7 +169,7 @@ class NewsSetting extends React.Component {
       title: '更新时间',
       dataIndex: 'updatedAt',
       key: 'updatedAt',
-      render:(text)=>{
+      render: (text) => {
         return (<span>
           {moment(text).format('YYYY-MM-DD, h:mm:ss a')}
         </span>)
@@ -155,13 +178,16 @@ class NewsSetting extends React.Component {
       title: '操作',
       dataIndex: 'edit',
       key: 'edit',
-      render: (text, record) => (
-        <span>
-          <a href="#">编辑</a>
-          <span className="ant-divider" />
-          <a href="#">删除</a>
-        </span>
-      )
+      render: (text, record) => {
+        const that = this;
+        return (
+          <span>
+            <a onClick={() => { that.hadndleEdit(record) }}>编辑</a>
+            <span className="ant-divider" />
+            <a href="#">删除</a>
+          </span>
+        )
+      }
     }]
 
     return (
@@ -204,13 +230,13 @@ class NewsSetting extends React.Component {
         </Row>
         {/*表格*/}
         <Row>
-          <Card title="博物馆快讯" style={{marginTop:"20px"}}>
-            <Table rowKey="objectId" columns={tableColumns} row dataSource={quickInfoData}/>
+          <Card title="博物馆快讯" style={{ marginTop: "20px" }}>
+            <Table rowKey="objectId" columns={tableColumns} dataSource={quickInfoData} />
           </Card>
         </Row>
         <Row>
-          <Card title="公告栏" style={{marginTop:"20px"}}>
-            <Table rowKey="objectId" columns={tableColumns} dataSource={noticeData}/>
+          <Card title="公告栏" style={{ marginTop: "20px" }}>
+            <Table rowKey="objectId" columns={tableColumns} dataSource={noticeData} />
           </Card>
         </Row>
       </div>
