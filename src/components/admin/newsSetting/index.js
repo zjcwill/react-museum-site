@@ -187,7 +187,7 @@ class NewsSetting extends React.Component {
     }
 
     return (
-      <Popconfirm title="Are you sure delete this task?" onConfirm={confirm} okText="确定" cancelText="取消">
+      <Popconfirm title="你确定要删除这条资讯?" onConfirm={confirm} okText="确定" cancelText="取消">
         <a href="#">删除</a>
       </Popconfirm>
     )
@@ -244,11 +244,13 @@ class NewsSetting extends React.Component {
           </Button>
           {/*新建文章弹窗*/}
           <Modal
-            title="新增文章"
+            title={this.state.isEdit?"编辑文章":"新建文章"}
             width={"800px"}
             visible={this.state.visible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
+            okText="确定"
+            cancelText="取消"
           >
             <p>
               <span style={{ color: "red" }}>*</span>文章标题:

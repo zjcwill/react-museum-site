@@ -34,7 +34,7 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
 const AdminPage = connect()(props => {
-  const isLogined = true ||props.data.isLogined; //开发环境 默认登陆状态为真
+  const isLogined = props.data.isLogined; //开发环境 默认登陆状态为真
   const changeTab = (key)=>{
     if(key == 2){
       actions.NewSetting.getArticles();
