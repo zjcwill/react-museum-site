@@ -70,37 +70,30 @@ const MuseumNews = props => {
 //公告栏&重要活动（占位图）
 const BoradInformation = props => {
   return (
-    <Row style={{ paddingTop: "20px" }}>
-      <Col span={12}>
-        <Card
-          title="公告栏"
-          style={{ width: "100%", maxHeight: "200px" }}
-          loading={false}
-          className="news-card-item"
-        >
-          {props.data.length > 0 ? (
-            props.data.map((item, index) => {
-              return (
-                <div>
-                  <Link
-                    to={`/detailPage/?class=notice;id=${item.objectId}`}
-                    key={item.objectId}
-                  >
-                    <p>{item.title}</p>
-                  </Link>
-                  {index != props.data.length - 1 ? <Divider /> : null}
-                </div>
-              );
-            })
-          ) : (
-            <Spin />
-          )}
-        </Card>
-      </Col>
-      <Col offset={1} span={11}>
-        <img style={placeholdImg} src="http://via.placeholder.com/800x200" />
-      </Col>
-    </Row>
+    <Card
+      title="公告栏"
+      style={{ width: "100%",maxHeight: "200px", overflow: "auto" }}
+      loading={false}
+      className="news-card-item"
+    >
+      {props.data.length > 0 ? (
+        props.data.map((item, index) => {
+          return (
+            <div>
+              <Link
+                to={`/detailPage/?class=notice;id=${item.objectId}`}
+                key={item.objectId}
+              >
+                <p>{item.title}</p>
+              </Link>
+              {index != props.data.length - 1 ? <Divider /> : null}
+            </div>
+          );
+        })
+      ) : (
+        <Spin />
+      )}
+    </Card>
   );
 };
 // 博物馆快讯
@@ -108,12 +101,11 @@ const MuseumQuickInfo = props => {
   return (
     <Card
       title="博物馆快讯"
-      style={{ width: "100%", height: "400px" }}
+      style={{ width: "100%", height: "400px", overflow: "auto" }}
       loading={false}
       className="news-card-item"
     >
-      {
-        props.data.length > 0 ? (
+      {props.data.length > 0 ? (
         props.data.map((item, index) => {
           return (
             <div>
@@ -156,14 +148,46 @@ const FriendLink = () => {
         background: "rgb(190, 200, 200)"
       }}
     >
-      <FriendLinkItem name="友链网" href="https://www.baidu.com" />
-      <FriendLinkItem name="友链网" href="https://www.baidu.com" />
-      <FriendLinkItem name="友链网" href="https://www.baidu.com" />
-      <FriendLinkItem name="友链网" href="https://www.baidu.com" />
-      <FriendLinkItem name="友链网" href="https://www.baidu.com" />
-      <FriendLinkItem name="友链网" href="https://www.baidu.com" />
-      <FriendLinkItem name="友链网" href="https://www.baidu.com" />
-      <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+      <Row>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+      </Row>
+      <Row>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+        <Col span={4}>
+          <FriendLinkItem name="友链网" href="https://www.baidu.com" />
+        </Col>
+      </Row>
     </Card>
   );
 };
@@ -173,13 +197,14 @@ const FriendLinkItem = props => (
   <Button
     ghost
     style={{
-      marginRight: "10px",
-      marginBottom: "10px",
       width: "95px",
-      height: "55px"
+      height: "55px",
+      margin: "5px"
     }}
   >
-    <a href={props.href}>{props.name}</a>
+    <a target="_blank" href={props.href}>
+      {props.name}
+    </a>
   </Button>
 );
 
@@ -188,14 +213,15 @@ const NewsPage = connect(state => {
 })(props => {
   return (
     <div style={{ minWidth: "1200px" }}>
-      <MuseumNews data={props.data.notice} />
-      <Row style={{ paddingTop: "20px" }}>
+      <Row style={{ marginTop: "20px" }}>
         <Col span={12}>
           <MuseumQuickInfo data={props.data.quickNews} />
         </Col>
-        <Col offset={1} span={11}>
-          <PlaceHoldImg />
-          <FriendLink />
+        <Col span={12}>
+          <Row style={{paddingLeft:"10px"}}> 
+            <MuseumNews data={props.data.notice} />
+            <FriendLink />
+          </Row>
         </Col>
       </Row>
     </div>

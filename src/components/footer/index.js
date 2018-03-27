@@ -7,10 +7,7 @@ const FooterComponent = () => {
     return (
         <Footer>
             <div className="container">
-                <span>© 2017 张嘉超 &nbsp;</span>
-                <span>
-                    <a href="https://zjcwll.top/">粤ICP备15111480号-1</a>
-                </span>
+                <span>© 2018 张嘉超 &nbsp;</span>
             </div>
         </Footer>
     )
