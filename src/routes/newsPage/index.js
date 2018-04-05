@@ -72,7 +72,7 @@ const BoradInformation = props => {
   return (
     <Card
       title="公告栏"
-      style={{ width: "100%",maxHeight: "200px", overflow: "auto" }}
+      style={{ width: "100%", maxHeight: "200px", overflow: "auto" }}
       loading={false}
       className="news-card-item"
     >
@@ -218,7 +218,7 @@ const NewsPage = connect(state => {
           <MuseumQuickInfo data={props.data.quickNews} />
         </Col>
         <Col span={12}>
-          <Row style={{paddingLeft:"10px"}}> 
+          <Row style={{ paddingLeft: "10px" }}>
             <MuseumNews data={props.data.notice} />
             <FriendLink />
           </Row>

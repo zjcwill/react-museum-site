@@ -1,34 +1,24 @@
 import React from "react";
-import {
-  Form,
-  Icon,
-  Input,
-  Button,
-  Checkbox,
-  Row,
-  Col,
-  message
-} from "antd";
+import { Form, Icon, Input, Button, Checkbox, Row, Col, message } from "antd";
 import { xLCId, xLCKey } from "../../utils/globalKey";
 import axios from "axios";
 import "./index.css";
-import mirror, {actions} from 'mirrorx';
+import mirror, { actions } from "mirrorx";
 
 mirror.model({
-  name:"SigninPage",
-  initialState:{
-    isLogined:false
+  name: "SigninPage",
+  initialState: {
+    isLogined: false
   },
-  reducers:{
+  reducers: {
     save(state, data) {
       return { ...state, ...data };
     },
-    changeLogin(state,data){      
-     return {...state,...{isLogined:data}}
+    changeLogin(state, data) {
+      return { ...state, ...{ isLogined: data } };
     }
   }
-})
-
+});
 
 const FormItem = Form.Item;
 const headers = {
@@ -43,7 +33,6 @@ const error = () => {
 };
 
 class LoginForm extends React.Component {
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -55,15 +44,18 @@ class LoginForm extends React.Component {
           headers: { ...headers },
           data: { ts: new Date() }
         }).then(resp => {
-            const { data } = resp;
-            if(values.userName===data.email && values.password===data.password){
-                success();
-                actions.SigninPage.changeLogin(true);
-                actions.routing.push("/admin");
-            } else {
-                error();
-                return;
-            }
+          const { data } = resp;
+          if (
+            values.userName === data.email &&
+            values.password === data.password
+          ) {
+            success();
+            actions.SigninPage.changeLogin(true);
+            actions.routing.push("/admin");
+          } else {
+            error();
+            return;
+          }
         });
       }
     });
@@ -111,7 +103,6 @@ class LoginForm extends React.Component {
 const WrappedLoginForm = Form.create()(LoginForm);
 
 const SigninPage = props => {
-
   return (
     <Row
       type="flex"

@@ -32,14 +32,12 @@ mirror.hook((action, getState) => {
     location.pathname === "/detailPage/" &&
     location.search
   ) {
-    // console.log("!!!进入详情页", location.search);
 
     const searchs = location.search.split(";");
     const category = searchs[0].split("=")[1];
     const id = searchs[1].split("=")[1];
 
     actions.NewsDetailPage.getTheArticle(id, category);
-    // actions.NewsIndexPage.getNewsTitleAndId();
   }
 });
 
