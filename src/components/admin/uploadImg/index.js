@@ -19,20 +19,15 @@ class UploadImg extends React.Component {
     handleChange = info => {
       let fileList = info.fileList;
   
-      // 1. Limit the number of uploaded files
-      //    Only to show two recent uploaded files, and old ones will be replaced by the new
       fileList = fileList.slice(-2);
   
-      // 2. read from response and show file link
       fileList = fileList.map(file => {
         if (file.response) {
-          // Component will show file.url as link
           file.url = file.response.url;
         }
         return file;
       });
   
-      // 3. filter successfully uploaded files according to response from server(成功上传回调)
       fileList = fileList.filter(file => {
         if (file.response) {
           axios({

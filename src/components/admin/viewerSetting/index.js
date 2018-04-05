@@ -20,6 +20,22 @@ const ViewerSetting  = () => {
       {
         type: "Viewer",
         fileName: "viewer4"
+      },
+      {
+        type: "Viewer",
+        fileName: "viewer5"
+      },
+      {
+        type: "Viewer",
+        fileName: "viewer6"
+      },
+      {
+        type: "Viewer",
+        fileName: "viewer7"
+      },
+      {
+        type: "Viewer",
+        fileName: "viewer8"
       }
     ];
 
