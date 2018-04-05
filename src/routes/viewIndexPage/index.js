@@ -1,6 +1,7 @@
 import React from "react";
 import mirror, { Link, actions, connect } from "mirrorx";
 import { Row, Col, Spin } from "antd";
+import LazyLoad from 'react-lazy-load';
 import { loadViewer } from "../../services/indexPage";
 import _ from "lodash";
 import qs from "query-string";
@@ -50,7 +51,9 @@ const ViewImgPreview = props => {
   const defaultImg = props.imgUrl || "http://via.placeholder.com/1200x400";
   return (
     <Link className={"viewer"} to={{pathname:`/viewer`,search:`?id=${props.index}`}}>
-      <img alt="" src={defaultImg} />
+      <LazyLoad height="400px" width="100%">
+        <img alt="" src={defaultImg} />
+      </LazyLoad>
     </Link>
   );
 };
