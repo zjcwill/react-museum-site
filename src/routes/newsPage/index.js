@@ -79,10 +79,9 @@ const BoradInformation = props => {
       {props.data.length > 0 ? (
         props.data.map((item, index) => {
           return (
-            <div>
+            <div key={item.objectId}>
               <Link
                 to={`/detailPage/?class=notice;id=${item.objectId}`}
-                key={item.objectId}
               >
                 <p>{item.title}</p>
               </Link>
@@ -108,10 +107,9 @@ const MuseumQuickInfo = props => {
       {props.data.length > 0 ? (
         props.data.map((item, index) => {
           return (
-            <div>
+            <div key={item.objectId}>
               <Link
                 to={`/detailPage/?class=quickInfo;id=${item.objectId}`}
-                key={item.objectId}
               >
                 <p>{item.title}</p>
               </Link>

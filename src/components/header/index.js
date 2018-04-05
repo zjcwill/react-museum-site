@@ -6,7 +6,7 @@ import './index.css';
 const { Header } = Layout;
 
 const HeaderComponent = ({ location }) => {
-    console.log(location.pathname)
+    // console.log(location.pathname)
     return (
         <Header>
             <div className="logo" />
