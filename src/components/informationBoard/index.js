@@ -1,14 +1,15 @@
 import React from "react";
 import { Card, Row, Col } from "antd";
 import "./index.css";
+import QueueAnim from "rc-queue-anim";
 
 class InformationBoardCard extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            number: props.number,
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      number: props.number
+    };
+  }
 
   render() {
     return (
@@ -30,12 +31,13 @@ class InformationBoardCard extends React.Component {
 
 const InformationBoard = () => (
   <Row className="informationboard-container">
-    <InformationBoardCard title="馆藏量" number="1000000" />
-    <InformationBoardCard title="访问人数" number="1000000" />
-    <InformationBoardCard title="馆藏量" number="1000000" />
-    <InformationBoardCard title="馆藏量" number="1000000" />
+    <QueueAnim delay={500}>
+      <InformationBoardCard key={1} title="馆藏量" number="1000000" />
+      <InformationBoardCard key={2} title="访问人数" number="1000000" />
+      <InformationBoardCard key={3} title="阅读量" number="1000000" />
+      <InformationBoardCard key={4} title="人气值" number="1000000" />
+    </QueueAnim>
   </Row>
 );
 
 export default InformationBoard;
-

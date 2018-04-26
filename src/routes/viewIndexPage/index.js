@@ -4,7 +4,7 @@ import { Row, Col, Spin } from "antd";
 import LazyLoad from 'react-lazy-load';
 import { loadViewer } from "../../services/indexPage";
 import _ from "lodash";
-import qs from "query-string";
+import QueueAnim from 'rc-queue-anim';
 import "./style.css";
 
 mirror.model({
@@ -63,7 +63,7 @@ class ViewIndexPage extends React.Component {
   render() {
     return this.props.data.viewerURL.length > 0 ? (
       this.props.data.viewerURL.map((item, index) => {
-        return <ViewImgPreview key={index} imgUrl={item} index={index} />;
+        return <ViewImgPreview key={item} imgUrl={item} index={index} />;
       })
     ) : (
       <Row>
