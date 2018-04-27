@@ -7,8 +7,20 @@ class InformationBoardCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      number: props.number
+      number: null
     };
+  }
+  componentDidMount() {
+    this.setState({ number: this.props.from, to: this.props.to });
+    this.timer = setInterval(() => this.grow(), 10);
+  }
+  componentWillMount() {
+    clearInterval(this.timer);
+  }
+  grow() {
+    if (this.state.number < this.state.to) {
+      this.setState({ number: this.state.number + 1 });
+    }
   }
 
   render() {
@@ -31,11 +43,21 @@ class InformationBoardCard extends React.Component {
 
 const InformationBoard = () => (
   <Row className="informationboard-container">
-    <QueueAnim delay={500}>
-      <InformationBoardCard key={1} title="馆藏量" number="1000000" />
-      <InformationBoardCard key={2} title="访问人数" number="1000000" />
-      <InformationBoardCard key={3} title="阅读量" number="1000000" />
-      <InformationBoardCard key={4} title="人气值" number="1000000" />
+    <QueueAnim delay={650}>
+      <InformationBoardCard key={1} title="馆藏量" from={999900} to={1000000} />
+      <InformationBoardCard
+        key={2}
+        title="访问人数"
+        from={999900}
+        to={1000000}
+      />
+      <InformationBoardCard key={3} title="阅读量" from={999900} to={1000000} />
+      <InformationBoardCard
+        key={4}
+        title="人气值"
+        from={999900}
+        to={1000000}
+      />
     </QueueAnim>
   </Row>
 );
