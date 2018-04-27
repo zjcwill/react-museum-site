@@ -20,7 +20,6 @@ mirror.model({
   effects: {
     async getNewsTitleAndId() {
       getArticle().then(resp => {
-        // console.log(resp);
         const results = _.get(resp, "data.results");
         if (results) {
           const notice = []; //公告
@@ -38,7 +37,7 @@ mirror.model({
             quickNews: quickNews
           });
         } else {
-          console.log("报错了");
+          console.error("报错了",results);
         }
       });
     }
