@@ -71,7 +71,7 @@ const BoradInformation = props => {
   return (
     <Card
       title="公告栏"
-      style={{ width: "100%", maxHeight: "200px", overflow: "auto" }}
+      style={{ width: "100%", height: "400px ", overflow: "auto" }}
       loading={false}
       className="news-card-item"
     >
@@ -99,7 +99,7 @@ const MuseumQuickInfo = props => {
   return (
     <Card
       title="博物馆快讯"
-      style={{ width: "100%", height: "400px", overflow: "auto" }}
+      style={{ width: "100%", height: "600px", overflow: "auto" }}
       loading={false}
       className="news-card-item"
     >
