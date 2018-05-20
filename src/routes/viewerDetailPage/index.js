@@ -16,6 +16,12 @@ mirror.model({
         save(state, data) {
             return { ...state, ...data };
         },
+        init(state){
+            return {
+                id:null,
+                imgUrl:null
+            }
+        }
     },
     effects: {
         async getImgUrl(id, getState) {
@@ -33,6 +39,7 @@ mirror.hook((action, getState) => {
       location.pathname === "/viewer"
     ) {
         const id = location.search.split("=")[1];
+        actions.viewerDetails.init();
         actions.viewerDetails.save({id:id});
         actions.viewerDetails.getImgUrl(id);
     }
@@ -50,6 +57,7 @@ const Options = (height = 800) => {
         }
     };
 };
+
 
 const App = connect(state => state)(props => {
     const { viewerDetails:{imgUrl} } = props;    
