@@ -18,4 +18,4 @@ yarn
 ```bash
 npm start
 ```
-（后端使用leancloud bass云无需启动）
+> 后端使用leancloud bass云无需启动

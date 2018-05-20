@@ -43,7 +43,7 @@ const AdminPage = connect()(props => {
   return (
    isLogined ?
    ( <div>
-    <Tabs onChange={changeTab}>
+    <Tabs onChange={changeTab} style={{overflow:'hidden'}}>
       <TabPane tab="主页" key="1">
         {MainPageSetting()}
       </TabPane>
