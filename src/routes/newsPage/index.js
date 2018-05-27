@@ -4,6 +4,7 @@ import { Row, Col, Card, Tabs, Button, Spin, Divider } from "antd";
 import "./index.css";
 import { getArticle } from "../../services/indexPage";
 import _ from "lodash";
+
 const { TabPane } = Tabs;
 
 mirror.model({
@@ -53,9 +54,6 @@ mirror.hook((action, getState) => {
     actions.NewsIndexPage.getNewsTitleAndId();
   }
 });
-
-//占位图统一格式
-const placeholdImg = { width: "100%", height: "200px" };
 
 //馆内公告
 const MuseumNews = props => {
@@ -120,18 +118,6 @@ const MuseumQuickInfo = props => {
         <Spin />
       )}
     </Card>
-  );
-};
-
-//占位图
-const PlaceHoldImg = () => {
-  return (
-    <div>
-      <img
-        style={{ width: "100%", height: "190px", paddingBottom: "10px" }}
-        src="http://via.placeholder.com/220x200"
-      />
-    </div>
   );
 };
 

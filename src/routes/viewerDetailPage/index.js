@@ -52,7 +52,6 @@ const Options = (height = 800) => {
         container: 'photosphere',
         navbar: 'autorotate zoom fullscreen',
         size: {
-            // width: 500,
             height: height
         }
     };

@@ -156,7 +156,6 @@ class NewsSetting extends React.Component {
   };
   //编辑文章
   handleEdit = (record) => {
-    // console.log("edit", record.content)
     this.setState({
       visible: true,
       editorTitle: record.title,

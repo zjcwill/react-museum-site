@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'mirrorx';
 import Header from '../components/header';
 import Footer from '../components/footer';
-import ReduxDemo from '../demo/redux';
 import { Layout } from 'antd';
 import IndexPage from './IndexPage';
 import NewsPage from './newsPage';
@@ -20,7 +19,6 @@ const MainRouter = () => (
     <Content>
       <Route exact path="/" component={IndexPage}/>
       <div style={{padding:"0 50px"}}>
-        <Route path="/reduxDemo" component={ReduxDemo} />
         <Route path="/news" component={NewsPage} />
         <Route path="/detailPage/*" component={NewsDetailPage} />
         <Route path="/viewerIndex" component={ViewerIndexPage} />
